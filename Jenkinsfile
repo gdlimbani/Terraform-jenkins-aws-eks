@@ -68,14 +68,18 @@ pipeline {
         // }
         stage('Login to Docker Hub') {
             steps {
-                sh 'docker login -u token -p $DOCKER_HUB_PAT'
+                bat '''
+                docker login -u token -p $DOCKER_HUB_PAT
+                '''
             }
         }
 
         stage('Pull Docker Images') {
             steps {
-                sh 'docker pull $DOCKER_PRIVATE_REPO_IMAGE'
-                sh 'docker pull $DOCKER_PUBLIC_REPO_IMAGE'
+                bat '''
+                docker pull $DOCKER_PRIVATE_REPO_IMAGE
+                docker pull $DOCKER_PUBLIC_REPO_IMAGE
+                '''
             }
         }
         stage('Deploy to EKS') {
