@@ -69,7 +69,7 @@ pipeline {
         stage('Login to Docker Hub') {
             steps {
                 bat '''
-                docker login -u gdlimbani -p $DOCKER_HUB_PAT
+                docker login -u gdlimbani -p dckr_pat_7q4RHT2dzMdj0SeUIpYnjPfltv8
                 '''
             }
         }
