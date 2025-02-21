@@ -88,7 +88,7 @@ pipeline {
         stage('Deploy to EKS') {
             steps {
                 script {
-                    bat "aws eks update-kubeconfig --name gdl-eks-cluster"
+                    bat "aws eks update-kubeconfig --name gdl-eks-cluster --region ap-south-1"
                     bat "kubectl apply -f frontend-deployment.yaml"
                     bat "kubectl apply -f backend-deployment.yaml"
                     bat "kubectl apply -f frontend-service.yaml"
