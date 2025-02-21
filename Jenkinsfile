@@ -75,10 +75,12 @@ pipeline {
 
         stage('Pull Docker Images') {
             steps {
-                def frontendImage = 'gdlimbani/smartpps-frontend:20241101'
-                def backendImage = 'gdlimbani/smartpps-backend:20241101'
-                bat "docker pull ${frontendImage}"
-                bat "docker pull ${backendImage}"
+                script {
+                    def frontendImage = 'gdlimbani/smartpps-frontend:20241101'
+                    def backendImage = 'gdlimbani/smartpps-backend:20241101'
+                    bat "docker pull ${frontendImage}"
+                    bat "docker pull ${backendImage}"
+                }
             }
         }
         stage('Deploy to EKS') {
