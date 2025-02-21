@@ -85,18 +85,18 @@ pipeline {
         }
         stage('Deploy to EKS') {
             steps {
-                bat '''
-                kubectl apply -f frontend-deployment.yaml
-                kubectl apply -f backend-deployment.yaml
-                kubectl apply -f frontend-service.yaml
-                kubectl apply -f backend-service.yaml
-                '''
+                script {
+                    bat "kubectl apply -f frontend-deployment.yaml"
+                    bat "kubectl apply -f backend-deployment.yaml"
+                    bat "kubectl apply -f frontend-service.yaml"
+                    bat "kubectl apply -f backend-service.yaml"
+                }
             }
         }
     }
     post {
         always {
-            bat 'docker logout'
+            //bat 'docker logout'
             cleanWs() // Clean up workspace
         }
     }
