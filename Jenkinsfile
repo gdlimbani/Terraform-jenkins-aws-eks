@@ -5,8 +5,6 @@ pipeline {
         EKS_CLUSTER_NAME = 'gdl-eks-cluster'
         //DOCKER_HOST = 'tcp://localhost:2375' // For Windows
         // DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_CREDENTIALS')
-        DOCKER_PRIVATE_REPO_IMAGE = 'gdlimbani/smartpps-frontend:20241101'
-        DOCKER_PUBLIC_REPO_IMAGE = 'gdlimbani/smartpps-backend:20241101'
     }
     stages {
         // stage('Initialize') {
@@ -77,10 +75,10 @@ pipeline {
 
         stage('Pull Docker Images') {
             steps {
-                bat '''
-                docker pull $DOCKER_PRIVATE_REPO_IMAGE
-                docker pull $DOCKER_PUBLIC_REPO_IMAGE
-                '''
+                def frontendImage = 'gdlimbani/smartpps-frontend:20241101'
+                def backendImage = 'gdlimbani/smartpps-backend:20241101'
+                bat "docker pull ${frontendImage}"
+                bat "docker pull ${backendImage}"
             }
         }
         stage('Deploy to EKS') {
