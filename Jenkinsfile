@@ -4,7 +4,7 @@ pipeline {
         AWS_DEFAULT_REGION = 'ap-south-1'
         EKS_CLUSTER_NAME = 'gdl-eks-cluster'
         //DOCKER_HOST = 'tcp://localhost:2375' // For Windows
-        DOCKER_HUB_PAT = 'dckr_pat_7q4RHT2dzMdj0SeUIpYnjPfltv8' //credentials('DOCKER_HUB_PAT')
+        DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_CREDENTIALS')
         DOCKER_PRIVATE_REPO_IMAGE = 'gdlimbani/smartpps-frontend:20241101'
         DOCKER_PUBLIC_REPO_IMAGE = 'gdlimbani/smartpps-backend:20241101'
     }
@@ -69,7 +69,8 @@ pipeline {
         stage('Login to Docker Hub') {
             steps {
                 bat '''
-                echo $DOCKER_HUB_PAT | docker login -u token --password-stdin
+                echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+	            echo 'Login Completed'
                 '''
             }
         }
