@@ -1,5 +1,5 @@
 pipeline {
-    agent {label "docker-build-node"}
+    agent any
     environment {
         AWS_DEFAULT_REGION = 'ap-south-1'
         EKS_CLUSTER_NAME = 'gdl-eks-cluster'
