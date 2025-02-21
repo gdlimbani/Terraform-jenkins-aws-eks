@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent {label "docker-build-node"}
     environment {
         AWS_DEFAULT_REGION = 'ap-south-1'
         EKS_CLUSTER_NAME = 'gdl-eks-cluster'
@@ -96,6 +96,7 @@ pipeline {
     }
     post {
         always {
+            bat 'docker logout'
             cleanWs() // Clean up workspace
         }
     }
