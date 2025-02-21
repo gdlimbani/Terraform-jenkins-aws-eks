@@ -89,10 +89,10 @@ pipeline {
             steps {
                 script {
                     bat "aws eks update-kubeconfig --name gdl-eks-cluster --region ap-south-1"
-                    bat "kubectl apply -f frontend-deployment.yaml"
-                    bat "kubectl apply -f backend-deployment.yaml"
-                    bat "kubectl apply -f frontend-service.yaml"
-                    bat "kubectl apply -f backend-service.yaml"
+                    bat "kubectl apply -f frontend-deployment.yaml --validate=false"
+                    bat "kubectl apply -f backend-deployment.yaml --validate=false"
+                    bat "kubectl apply -f frontend-service.yaml --validate=false"
+                    bat "kubectl apply -f backend-service.yaml --validate=false"
                 }
             }
         }
